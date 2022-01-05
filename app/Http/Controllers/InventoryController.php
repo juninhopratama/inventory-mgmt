@@ -166,4 +166,66 @@ class InventoryController extends Controller
             'orderId' => $id
         ]);
     }
+
+    public function showTargetedItemIn($id)
+    {
+        $item = Items::where('item_id', $id)->first();
+        
+        if(is_null($item)){
+            return redirect()->route('inventoryin.create')
+            ->with('error', 'ID Item tidak terdaftar!');
+        }
+
+        return view('fifo.targetedinventoryin', [
+            'item' => $item
+        ]);
+    }
+
+    public function showTargetedItemOut($id)
+    {
+        $item = Items::where('item_id', $id)->first();
+        
+        if(is_null($item)){
+            return redirect()->route('inventoryout.create')
+            ->with('error', 'ID Item tidak terdaftar!');
+        }
+
+        return view('fifo.targetedinventoryout', [
+            'item' => $item
+        ]);
+    }
+
+    public function editInventoryIn($id)
+    {
+        $inventory = Inventory::find($id)->first();
+
+        return view('fifo.editinventory', [
+            'inventory' => $inventory
+        ]);
+    }
+
+    public function updateInventoryin(Request $request, $id)
+    {
+        $request->validate([
+            'kode_rak' => 'required',
+            'lot_id' => 'required',
+            'qty' => 'required|numeric'
+        ]);
+
+        $inventory = Inventory::find($id)->update($request->except(['_token', '_method']));
+
+        return redirect()->route('inventoryin.list', $request->item_id)
+            ->with('success', 'Item berhasil diedit.');
+    }
+
+    public function destroyInventory($id)
+    {
+        $inventory = Inventory::find($id)->first();
+        $inventory_id = $inventory->item_id;
+        $inventory = Inventory::find($id)->delete();
+        return redirect()->route('inventoryin.list', $inventory_id)
+            ->with('success', 'Lot berhasil dihapus.');
+
+        
+    }
 }

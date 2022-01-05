@@ -63,15 +63,16 @@
                      </li>
 
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Management</span></li>
-                     <li class="active">
+                     <li>
                         <a href="{{route ('registitem.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-file-edit-line"></i><span>Register Item</span></a>
                      </li>
-                     <li>
+                     <li class="active">
                         <a href="{{route ('inventoryin.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-install-fill"></i><span>Inventory In</span></a>
                      </li>
                      <li>
                         <a href="{{route ('inventoryout.create')}}" class="iq-waves-effect"><i class="ri-uninstall-fill"></i><span>Inventory Out</span></a>
                      </li>
+
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Dashboard</span></li>
                      <li>
                         <a href="{{route ('allitem.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-chat-check-line"></i><span>All Items</span></a>
@@ -92,6 +93,12 @@
                <p>{{ session('success') }}</p>
             </div>
             @endif
+
+            @if (session('error'))
+            <div class="alert-danger">
+               <p>{{ session('error') }}</p>
+            </div>
+            @endif
             
             @if ($errors->any())
             <div class="alert-danger">
@@ -105,29 +112,29 @@
             <div class="iq-card">
                <div class="iq-card-header d-flex justify-content-between">
                   <div class="iq-header-title">
-                     <h4 class="card-title">Edit Item</h4>
+                     <h4 class="card-title">Edit Inventory In</h4>
                   </div>
                </div>
                <div class="iq-card-body">
                   <p>Masukkan detil item dibawah</p>
-                  <form method="POST" action="{{ route('registitem.update', $item->item_id) }}">
+                  <form method="POST" action="{{ route ('inventoryin.update', $inventory->id) }}">
                   @csrf
                   @method('PUT')
                      <div class="form-group">
                         <label for="id">ID Item</label>
-                        <input type="text" class="form-control" name="item_id" value="{{ $item->item_id }}" readonly>
+                        <input type="text" class="form-control" name="item_id" list="itemlist" value="{{$inventory->item_id}}" readonly>
                      </div>
                      <div class="form-group">
-                        <label for="item_name">Nama Item</label>
-                        <input type="text" class="form-control" name="item_name" value="{{ $item->item_name }}">
+                        <label for="item_name">Kode Lot</label>
+                        <input type="text" class="form-control" name="lot_id" value="{{$inventory->lot_id}}">
                      </div>
                      <div class="form-group">
-                        <label for="item_satuan">Satuan Item</label>
-                        <input type="text" class="form-control" name="item_satuan" value="{{ $item->item_satuan }}">
+                        <label for="item_name">Kode Rak</label>
+                        <input type="text" class="form-control" name="kode_rak" value="{{$inventory->kode_rak}}">
                      </div>
                      <div class="form-group">
-                        <label for="item_supplier">Supplier Item</label>
-                        <input type="text" class="form-control" name="item_supplier" value="{{ $item->item_supplier }}">
+                        <label for="item_satuan">Jumlah</label>
+                        <input type="number" class="form-control" name="qty" value="{{$inventory->qty}}">
                      </div>
                      <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

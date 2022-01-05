@@ -63,13 +63,13 @@
                      </li>
 
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Management</span></li>
-                     <li class="active">
+                     <li>
                         <a href="{{route ('registitem.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-file-edit-line"></i><span>Register Item</span></a>
                      </li>
                      <li>
                         <a href="{{route ('inventoryin.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-install-fill"></i><span>Inventory In</span></a>
                      </li>
-                     <li>
+                     <li class="active">
                         <a href="{{route ('inventoryout.create')}}" class="iq-waves-effect"><i class="ri-uninstall-fill"></i><span>Inventory Out</span></a>
                      </li>
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Dashboard</span></li>
@@ -92,6 +92,12 @@
                <p>{{ session('success') }}</p>
             </div>
             @endif
+
+            @if (session('error'))
+            <div class="alert-danger">
+               <p>{{ session('error') }}</p>
+            </div>
+            @endif
             
             @if ($errors->any())
             <div class="alert-danger">
@@ -105,29 +111,21 @@
             <div class="iq-card">
                <div class="iq-card-header d-flex justify-content-between">
                   <div class="iq-header-title">
-                     <h4 class="card-title">Edit Item</h4>
+                     <h4 class="card-title">Inventory Out</h4>
                   </div>
                </div>
                <div class="iq-card-body">
                   <p>Masukkan detil item dibawah</p>
-                  <form method="POST" action="{{ route('registitem.update', $item->item_id) }}">
+                  <form method="POST" action="{{route ('inventoryout.store')}}" onsubmit="return confirm('Pastikan data yang diisikan sudah benar! Klik OK untuk melanjutkan.');">
                   @csrf
-                  @method('PUT')
                      <div class="form-group">
                         <label for="id">ID Item</label>
                         <input type="text" class="form-control" name="item_id" value="{{ $item->item_id }}" readonly>
+                        <span>{{$item->item_name}}</span>
                      </div>
                      <div class="form-group">
-                        <label for="item_name">Nama Item</label>
-                        <input type="text" class="form-control" name="item_name" value="{{ $item->item_name }}">
-                     </div>
-                     <div class="form-group">
-                        <label for="item_satuan">Satuan Item</label>
-                        <input type="text" class="form-control" name="item_satuan" value="{{ $item->item_satuan }}">
-                     </div>
-                     <div class="form-group">
-                        <label for="item_supplier">Supplier Item</label>
-                        <input type="text" class="form-control" name="item_supplier" value="{{ $item->item_supplier }}">
+                        <label for="item_satuan">Jumlah Keluar</label>
+                        <input type="number" class="form-control" name="qty">
                      </div>
                      <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

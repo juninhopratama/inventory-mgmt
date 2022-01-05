@@ -4,7 +4,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Vito - Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>Warehouse Management App</title>
       <!-- Favicon -->
       <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
       <!-- Bootstrap CSS -->
@@ -32,19 +32,18 @@
          <!-- Sidebar  -->
          <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="index.html">
+               <a href="{{url ('/')}}">
                <div class="iq-light-logo">
                   <div class="iq-light-logo">
-                     <img src="images/logo.gif" class="img-fluid" alt="">
+                     <img src="{{asset('assets/images/newlogo.png')}}" class="img-fluid" alt="">
                    </div>
                      <div class="iq-dark-logo">
-                        <img src="images/logo-dark.gif" class="img-fluid" alt="">
+                        <img src="{{asset('assets/images/newlogo.png')}}" class="img-fluid" alt="">
                      </div>
                </div>
                <div class="iq-dark-logo">
-                  <img src="images/logo-dark.gif" class="img-fluid" alt="">
+                  <img src="{{asset('assets/images/newlogo.png')}}" class="img-fluid" alt="">
                </div>
-               <span>Vito</span>
                </a>
                <div class="iq-menu-bt-sidebar">
                   <div class="iq-menu-bt align-self-center">
@@ -85,6 +84,7 @@
                <div class="p-3"></div>
             </div>
          </div>
+         @include('layouts.header')
          <!-- Page Content  -->
          <div id="content-page" class="content-page">
             <div class="container-fluid">
