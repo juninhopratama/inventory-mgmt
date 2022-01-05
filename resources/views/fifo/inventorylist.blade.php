@@ -84,6 +84,7 @@
                <div class="p-3"></div>
             </div>
          </div>
+         @include('layouts.header')
          <!-- Page Content  -->
          <div id="content-page" class="content-page">
             @if (session('success'))
