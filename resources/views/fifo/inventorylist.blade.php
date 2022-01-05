@@ -4,7 +4,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Vito - Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>Warehouse Management App</title>
       <!-- Favicon -->
       <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
       <!-- Bootstrap CSS -->
@@ -32,19 +32,18 @@
          <!-- Sidebar  -->
          <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="index.html">
+            <a href="{{url ('/')}}">
                <div class="iq-light-logo">
                   <div class="iq-light-logo">
-                     <img src="images/logo.gif" class="img-fluid" alt="">
+                     <img src="{{asset('assets/images/newlogo.png')}}" class="img-fluid" alt="">
                    </div>
                      <div class="iq-dark-logo">
-                        <img src="images/logo-dark.gif" class="img-fluid" alt="">
+                        <img src="{{asset('assets/images/newlogo.png')}}" class="img-fluid" alt="">
                      </div>
                </div>
                <div class="iq-dark-logo">
-                  <img src="images/logo-dark.gif" class="img-fluid" alt="">
+                  <img src="{{asset('assets/images/newlogo.png')}}" class="img-fluid" alt="">
                </div>
-               <span>Vito</span>
                </a>
                <div class="iq-menu-bt-sidebar">
                   <div class="iq-menu-bt align-self-center">
@@ -145,8 +144,8 @@
                                <td>{{$inventory->qty}}</td>
                                <td>{{$inventory->created_at}}</td>
                                <td>
-                                  <a href="{{route ('registitem.edit', $inventory->item_id)}}" type="button" class="btn mb-1 btn-info rounded-pill "><i class="ri-draft-line"></i>Edit Item</a>
-                                  <form action="{{ route('registitem.delete',$inventory->item_id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus item ini?');">
+                                  <a href="{{route ('inventoryin.edit', $inventory->id)}}" type="button" class="btn mb-1 btn-info rounded-pill "><i class="ri-draft-line"></i>Edit Item</a>
+                                  <form action="{{ route('inventoryin.delete',$inventory->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus item ini?');">
                                      @csrf
                                      @method('DELETE')
                                     <button type="submit" class="btn btn-danger rounded-pill"><i class="ri-delete-bin-line"></i>Hapus Item</button>
@@ -157,7 +156,7 @@
                        </tbody>
                    </table>
                   </div>
-                  {!! $inventories->render() !!}
+                  {!! $inventories->links('pagination::bootstrap-4') !!}
                </div>
              </div>
             </div>
@@ -171,14 +170,8 @@
       <footer class="iq-footer">
          <div class="container-fluid">
             <div class="row">
-               <div class="col-lg-6">
-                  <ul class="list-inline mb-0">
-                     <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                     <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                  </ul>
-               </div>
                <div class="col-lg-6 text-right">
-                  Copyright 2020 <a href="#">Vito</a> All Rights Reserved.
+                  Copyright 2022 All Rights Reserved.
                </div>
             </div>
          </div>
