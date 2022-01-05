@@ -118,7 +118,7 @@
                <div class="iq-card-body">
                   <p>Masukkan detil item dibawah</p>
                   <div class="form-group">
-                        <form action="{{route ('targetedinventoryscan.in')}}">
+                        <form method="get" action="https://inventory-mgmt-proj.herokuapp.com/scan-in">
                               <label for="scan">Gunakan QR Scanner</label>   
                               <button type="submit" class="btn btn-secondary">Scan</button>
                         </form>
