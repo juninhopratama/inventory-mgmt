@@ -135,12 +135,20 @@
                         </datalist>
                      </div>
                      <div class="form-group">
-                        <label for="item_name">Kode Lot</label>
-                        <input type="text" class="form-control" name="lot_id">
+                        <label for="item_name">Kode Supplier</label>
+                        <input type="text" class="form-control" name="kode_supplier" style="text-transform:uppercase">
+                     </div>
+                     <div class="form-group">
+                        <label for="item_name">Nomor Truk</label>
+                        <input type="number" class="form-control" name="nomor_truk">
+                     </div>
+                     <div class="form-group">
+                        <label for="item_name">Kode Gudang</label>
+                        <input type="text" class="form-control" name="kode_gudang" style="text-transform:uppercase">
                      </div>
                      <div class="form-group">
                         <label for="item_name">Kode Rak</label>
-                        <input type="text" class="form-control" name="kode_rak">
+                        <input type="text" class="form-control" name="kode_rak" style="text-transform:uppercase">
                      </div>
                      <div class="form-group">
                         <label for="item_satuan">Jumlah</label>
