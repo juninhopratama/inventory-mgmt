@@ -23,13 +23,21 @@ class InventoryController extends Controller
     {
         $request->validate([
             'item_id' => 'required|exists:items,item_id',
-            'lot_id' => 'required',
+            'kode_supplier' => 'required',
+            'nomor_truk' => 'required|numeric',
+            'kode_gudang' => 'required',
             'qty' => 'required|numeric'
         ]);
 
+        $kode_supplier = $request->kode_supplier;
+        $nomor_truk = $request->nomor_truk;
+        $kode_gudang = $request->kode_gudang;
+        $today = date('Ymd');
+        $lot_id = strtoupper($kode_supplier) . '-' . $today . '-' . $nomor_truk . '-' . strtoupper($kode_gudang);
+
         $inventory = Inventory::create([
             'item_id' => $request->item_id,
-            'lot_id' => $request->lot_id,
+            'lot_id' => $lot_id,
             'qty' => $request->qty,
             'kode_rak' => $request->kode_rak
         ]);
