@@ -106,6 +106,16 @@
          <div class="row">
             <div class="col-sm-12">
                   <div class="iq-card">
+                  <div class="iq-card-body">
+                  <div class="form-group">
+                  <form method="GET" action="{{ route ('searchorder') }}">
+                     <div class="form-group">
+                        <label for="id">Cari Berdasarkan Tanggal</label>
+                        <input type="date" class="form-control" name="date">
+                     </div>
+                     <button type="submit" class="btn btn-primary">Cari</button>
+                  </form>
+               </div>
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
                               <h4 class="card-title">All Orders Datatable</h4>

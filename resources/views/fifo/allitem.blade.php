@@ -92,6 +92,12 @@
                <p>{{ session('success') }}</p>
             </div>
             @endif
+
+            @if (session('info'))
+            <div class="alert-info">
+               <p>{{ session('info') }}</p>
+            </div>
+            @endif
             
             @if ($errors->any())
             <div class="alert-danger">
@@ -106,6 +112,16 @@
          <div class="row">
             <div class="col-sm-12">
                   <div class="iq-card">
+                  <div class="iq-card-body">
+                  <div class="form-group">
+                  <form method="GET" action="{{ route ('searchitem') }}">
+                     <div class="form-group">
+                        <label for="id">Cari Item</label>
+                        <input type="text" class="form-control" name="search_string">
+                     </div>
+                     <button type="submit" class="btn btn-primary">Cari</button>
+                  </form>
+               </div>
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
                               <h4 class="card-title">All Items Datatable</h4>
