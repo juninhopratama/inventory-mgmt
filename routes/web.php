@@ -65,3 +65,7 @@ Route::get('/scan-in', function () {
 Route::get('/scan-out', function () {
     return view('fifo.inventoryoutscan');
 })->name('targetedinventoryscan.out');
+
+Route::get('/all-item/search', [InventoryController::class, 'searchItem'])->name('searchitem');
+
+Route::get('/all-order/search', [InventoryController::class, 'searchOrder'])->name('searchorder');

@@ -237,8 +237,22 @@ class InventoryController extends Controller
         $inventory_id = $inventory->item_id;
         $inventory = Inventory::where('id', $id)->delete();
         return redirect()->route('inventoryin.list', $inventory_id)
-            ->with('success', 'Lot berhasil dihapus.');
+            ->with('success', 'Lot berhasil dihapus.');   
+    }
 
-        
+    public function searchItem(Request $request)
+    {
+        $items = Items::where('item_name', 'like', '%'.$request->search_string.'%')->paginate(50);
+        return view('fifo.allitem', [
+            'items' => $items
+        ])->with('success', 'Pencarian selesai.');
+    }
+
+    public function searchOrder(Request $request)
+    {
+        $orders = Order::where('created_at', 'like', '%'.$request->date.'%')->groupBy('order_id')->paginate(50);
+        return view('fifo.orderlist', [
+            'orders' => $orders
+        ])->with('success', 'Pencarian selesai.');
     }
 }
