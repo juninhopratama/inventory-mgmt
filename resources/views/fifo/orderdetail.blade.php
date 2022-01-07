@@ -104,6 +104,19 @@
             @endif
             <div class="container-fluid">
          <div class="row">
+         <div class="col-sm-6 col-md-6 col-lg-3">
+                     <div class="iq-card iq-card-block iq-card-stretch ">
+                        <div class="iq-card-body">
+                                <div class="d-flex d-flex align-items-center justify-content-between">
+                                   <div>
+                                       <h2>{{$totalQty}}</h2>
+                                       <p class="fontsize-sm m-0">Total Quantity</p>
+                                   </div>
+                                   <div class="rounded-circle iq-card-icon dark-icon-light iq-bg-danger "> <i class="ri-uninstall-fill"></i></div>
+                                </div>
+                        </div>
+                     </div>
+                  </div>
             <div class="col-sm-12">
                   <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
@@ -121,6 +134,7 @@
                                <th>Kode Lot</th>
                                <th>Kode Rak</th>
                                <th>Jumlah Keluar</th>
+                               <th>Keterangan</th>
                            </tr>
                        </thead>
                        <tbody>
@@ -130,6 +144,7 @@
                                <td>{{$order->lot_id}}</td>
                                <td>{{$order->kode_rak}}</td>
                                <td>{{$order->qty}}</td>
+                               <td>{{$order->out_detail}}</td>
                            </tr>
                            @endforeach
                        </tbody>

@@ -117,7 +117,8 @@ class InventoryController extends Controller
                     'item_id' => $request->item_id,
                     'lot_id' => $currLotId,
                     'kode_rak' => $kodeRak,
-                    'qty' => $deductQty
+                    'qty' => $deductQty,
+                    'out_detail' => $request->out_detail
                 ]);
             }elseif($currLotQty == $want){
                 $deductQty = $want;
@@ -131,7 +132,8 @@ class InventoryController extends Controller
                     'item_id' => $request->item_id,
                     'lot_id' => $currLotId,
                     'kode_rak' => $kodeRak,
-                    'qty' => $deductQty
+                    'qty' => $deductQty,
+                    'out_detail' => $request->out_detail
                 ]);
             }elseif($currLotQty < $want){
                 $deductQty = $currLotQty;
@@ -145,7 +147,8 @@ class InventoryController extends Controller
                     'item_id' => $request->item_id,
                     'lot_id' => $currLotId,
                     'kode_rak' => $kodeRak,
-                    'qty' => $deductQty
+                    'qty' => $deductQty,
+                    'out_detail' => $request->out_detail
                 ]);
             }
         }
@@ -164,6 +167,7 @@ class InventoryController extends Controller
     {
         $orders = Order::where('order_id', $id)->orderBy('queue_no')->paginate(50);
         $item_id = Order::where('order_id', $id)->select('item_id')->first();
+        $totalQty = $orders->sum('qty');
         $item_id = $item_id->item_id;
         $inventoryDetail = Items::where('item_id', $item_id)->first();
         $inventoryName = $inventoryDetail->item_name;
@@ -171,7 +175,8 @@ class InventoryController extends Controller
             'orders' => $orders,
             'inventoryName' => $inventoryName,
             'itemId' => $item_id,
-            'orderId' => $id
+            'orderId' => $id,
+            'totalQty' => $totalQty
         ]);
     }
 
