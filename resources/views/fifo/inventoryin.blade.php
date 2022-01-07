@@ -139,7 +139,7 @@
                         <input type="text" class="form-control" name="kode_supplier" style="text-transform:uppercase">
                      </div>
                      <div class="form-group">
-                        <label for="item_name">Nomor Truk</label>
+                        <label for="item_name">Truk Ke-</label>
                         <input type="number" class="form-control" name="nomor_truk">
                      </div>
                      <div class="form-group">

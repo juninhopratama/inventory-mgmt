@@ -137,6 +137,10 @@
                         <label for="item_satuan">Jumlah Keluar</label>
                         <input type="number" class="form-control" name="qty">
                      </div>
+                     <div class="form-group">
+                        <label for="item_satuan">Keterangan Keluar</label>
+                        <input type="text" class="form-control" name="out_detail">
+                     </div>
                      <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                </div>

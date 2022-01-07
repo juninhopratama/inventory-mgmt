@@ -14,6 +14,7 @@ class Order extends Model
         'item_id',
         'lot_id',
         'kode_rak',
-        'qty'
+        'qty',
+        'out_detail'
     ];
 }
