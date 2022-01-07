@@ -205,7 +205,7 @@ class InventoryController extends Controller
 
     public function editInventoryIn($id)
     {
-        $inventory = Inventory::find($id)->first();
+        $inventory = Inventory::where('id', $id)->first();
 
         return view('fifo.editinventory', [
             'inventory' => $inventory
@@ -228,9 +228,9 @@ class InventoryController extends Controller
 
     public function destroyInventory($id)
     {
-        $inventory = Inventory::find($id)->first();
+        $inventory = Inventory::where('id', $id)->first();
         $inventory_id = $inventory->item_id;
-        $inventory = Inventory::find($id)->delete();
+        $inventory = Inventory::where('id', $id)->delete();
         return redirect()->route('inventoryin.list', $inventory_id)
             ->with('success', 'Lot berhasil dihapus.');
 
