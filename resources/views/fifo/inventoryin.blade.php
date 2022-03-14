@@ -80,6 +80,14 @@
                      <li>
                         <a href="{{route ('orderlist.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-truck-line"></i><span>All Orders</span></a>
                      </li>
+
+                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>-</span></li>
+                     <li>
+                        <a href="{{route ('logout')}}" class="iq-waves-effect" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-logout-box-r-line"></i><span>Log Out</span></a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                     </li>
                   </ul>
                </nav>
                <div class="p-3"></div>
@@ -99,7 +107,7 @@
                <p>{{ session('error') }}</p>
             </div>
             @endif
-            
+
             @if ($errors->any())
             <div class="alert-danger">
                <ul>
@@ -119,7 +127,7 @@
                   <p>Masukkan detil item dibawah</p>
                   <div class="form-group">
                         <form method="get" action="https://inventory-mgmt-proj.herokuapp.com/scan-in">
-                              <label for="scan">Gunakan QR Scanner</label>   
+                              <label for="scan">Gunakan QR Scanner</label>
                               <button type="submit" class="btn btn-secondary">Scan</button>
                         </form>
                      </div>
@@ -172,13 +180,13 @@
          </div>
       </footer>
 
-      
+
       <!-- Footer END -->
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      
+
       <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-      
+
       <script src="{{asset('assets/js/popper.min.js')}}"></script>
       <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
       <!-- Appear JavaScript -->
