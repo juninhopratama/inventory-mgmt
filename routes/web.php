@@ -73,4 +73,13 @@ Route::get('/all-item/search', [InventoryController::class, 'searchItem'])->midd
 
 Route::get('/all-order/search', [InventoryController::class, 'searchOrder'])->middleware(['auth'])->name('searchorder');
 
+Route::get('/stock-reporting', function () {
+    return view('fifo.allstockreport');
+})->middleware(['auth'])
+->name('stockreportinghome');
+
+Route::get('/stock-reporting/search', [InventoryController::class, 'stockreporting'])->middleware(['auth'])->name('stockreporting');
+
+Route::get('/stock-reporting/search/detail', [InventoryController::class, 'stockreportingdetail'])->middleware(['auth'])->name('stockreportingdetail');
+
 require __DIR__.'/auth.php';

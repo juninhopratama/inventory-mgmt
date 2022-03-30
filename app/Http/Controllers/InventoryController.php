@@ -262,6 +262,43 @@ class InventoryController extends Controller
         }
     }
 
+    public function stockreporting(Request $request)
+    {
+        $items = Inventory::join('items', 'inventories.item_id', '=', 'items.item_id')
+            ->selectRaw('`inventories`.`item_id`, `items`.`item_name`, `items`.`item_satuan`, SUM(`inventories`.`qty`) AS `Qty`, `inventories`.`created_at`')
+            ->whereDate('inventories.created_at', '=', $request->date)
+            ->groupBy('inventories.item_id')
+            ->paginate(50);
+
+        $requestDate = $request->date;
+        return view('fifo.stockreportdetail', [
+            'items' => $items,
+            'date' => $requestDate
+        ])->with('success', 'Pencarian selesai.');
+    }
+
+    public function stockreportingdetail(Request $request)
+    {
+        $inventories = Inventory::where('item_id', $request->id)
+            ->whereDate('created_at', '=', $request->date)
+            ->orderBy('created_at','asc')
+            ->paginate(50);
+
+        $totalQty = $inventories->sum('qty');
+
+        $inventoryName = Items::where('item_id', $request->id)->first();
+        $inventoryName = $inventoryName->item_name;
+        $requestDate = $request->date;
+
+        return view('fifo.stockreportdetaillist', [
+            'inventories' => $inventories,
+            'totalQty' => $totalQty,
+            'inventoryName' => $inventoryName,
+            'inventoryId' => $request->id,
+            'date' => $requestDate
+        ]);
+    }
+
     public function searchOrder(Request $request)
     {
         $orders = Order::where('created_at', 'like', '%'.$request->date.'%')->groupBy('order_id')->paginate(50);
