@@ -80,7 +80,7 @@
                         <a href="{{route ('orderlist.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-truck-line"></i><span>All Orders</span></a>
                      </li>
                      <li>
-                        <a href="{{route ('stockreporting')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-store-line"></i><span>Stock Reporting</span></a>
+                        <a href="{{route ('stockreportinghome')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-store-line"></i><span>Stock Reporting</span></a>
                      </li>
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>-</span></li>
                      <li>
