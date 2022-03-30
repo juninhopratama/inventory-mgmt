@@ -123,8 +123,10 @@
                   <div class="form-group">
                   <form method="GET" action="{{ route ('searchitem') }}">
                      <div class="form-group">
-                        <label for="id">Cari Item</label>
+                        <label for="search_string">Cari Item</label>
                         <input type="text" class="form-control" name="search_string">
+                        <label for="date">Cari Tanggal</label>
+                        <input type="date" class="form-control" name="date">
                      </div>
                      <button type="submit" class="btn btn-primary">Cari</button>
                   </form>

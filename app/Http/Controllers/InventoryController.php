@@ -51,7 +51,7 @@ class InventoryController extends Controller
         $inventories = Inventory::where('item_id', $id)
             ->orderBy('created_at','asc')
             ->paginate(50);
-        
+
         $totalQty = $inventories->sum('qty');
 
         $inventoryName = Items::where('item_id', $id)->first();
@@ -183,7 +183,7 @@ class InventoryController extends Controller
     public function showTargetedItemIn($id)
     {
         $item = Items::where('item_id', $id)->first();
-        
+
         if(is_null($item)){
             return redirect()->route('inventoryin.create')
             ->with('error', 'ID Item tidak terdaftar!');
@@ -197,7 +197,7 @@ class InventoryController extends Controller
     public function showTargetedItemOut($id)
     {
         $item = Items::where('item_id', $id)->first();
-        
+
         if(is_null($item)){
             return redirect()->route('inventoryout.create')
             ->with('error', 'ID Item tidak terdaftar!');
@@ -237,15 +237,29 @@ class InventoryController extends Controller
         $inventory_id = $inventory->item_id;
         $inventory = Inventory::where('id', $id)->delete();
         return redirect()->route('inventoryin.list', $inventory_id)
-            ->with('success', 'Lot berhasil dihapus.');   
+            ->with('success', 'Lot berhasil dihapus.');
     }
 
     public function searchItem(Request $request)
     {
-        $items = Items::where('item_name', 'like', '%'.$request->search_string.'%')->paginate(50);
-        return view('fifo.allitem', [
-            'items' => $items
-        ])->with('success', 'Pencarian selesai.');
+        if(is_null($request->date)){
+            $items = Items::where('item_name', 'like', '%'.$request->search_string.'%')->paginate(50);
+            return view('fifo.allitem', [
+                'items' => $items
+            ])->with('success', 'Pencarian selesai.');
+        }elseif(is_null($request->search_string)){
+            $items = Items::whereDate('created_at', '=', $request->date)->paginate(50);
+            return view('fifo.allitem', [
+                'items' => $items
+            ])->with('success', 'Pencarian selesai.');
+        }else {
+            $items = Items::where('item_name', 'like', '%'.$request->search_string.'%')
+                ->whereDate('created_at', '=', $request->date)
+                ->paginate(50);
+            return view('fifo.allitem', [
+                'items' => $items
+            ])->with('success', 'Pencarian selesai.');
+        }
     }
 
     public function searchOrder(Request $request)
