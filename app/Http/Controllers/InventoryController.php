@@ -124,7 +124,7 @@ class InventoryController extends Controller
                 $deductQty = $want;
                 $currLotQty = $currLotQty - $deductQty;
                 $want = $want - $deductQty;
-                $updateInventory = Inventory::where('lot_id', $currLotId)->delete();
+                $updateInventory = Inventory::where('lot_id', $currLotId)->where('kode_rak', $kodeRak)->delete();
                 $queue = $queue + 1;
                 $log = Order::create([
                     'order_id' => $orderId,
@@ -139,7 +139,7 @@ class InventoryController extends Controller
                 $deductQty = $currLotQty;
                 $currLotQty = $currLotQty - $deductQty;
                 $want = $want - $deductQty;
-                $updateInventory = Inventory::where('lot_id', $currLotId)->delete();
+                $updateInventory = Inventory::where('lot_id', $currLotId)->where('kode_rak', $kodeRak)->delete();
                 $queue = $queue + 1;
                 $log = Order::create([
                     'order_id' => $orderId,
