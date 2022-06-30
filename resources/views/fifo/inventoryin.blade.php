@@ -128,16 +128,17 @@
                <div class="iq-card-body">
                   <p>Masukkan detil item dibawah</p>
                   <div class="form-group">
-                        <form method="get" action="https://inventory-mgmt-proj.herokuapp.com/scan-in">
-                              <label for="scan">Gunakan QR Scanner</label>
-                              <button type="submit" class="btn btn-secondary">Scan</button>
-                        </form>
+                        {{-- <form method="get" action="https://inventory-mgmt-proj.herokuapp.com/scan-in"> --}}
+                        <label for="scan">Gunakan QR Scanner</label>
+                        <button id="btn-scan" type="submit" class="btn btn-secondary">Scan</button>
+                        <button id="btn-stop" type="submit" class="btn btn-danger">Stop Camera</button>
                      </div>
+                     <div id="reader" width="600px"></div>
                   <form method="POST" action="{{ route ('inventoryin.store') }}">
                   @csrf
                      <div class="form-group">
                         <label for="id">ID Item</label>
-                        <input type="text" class="form-control" name="item_id" list="itemlist">
+                        <input id="item_id" type="text" class="form-control" name="item_id" list="itemlist">
                         <datalist id="itemlist">
                            @foreach($items as $item)
                            <option value="{{$item->item_id}}">{{$item->item_id}} - {{$item->item_name}}</option>
@@ -187,6 +188,8 @@
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
+      <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
       <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 
       <script src="{{asset('assets/js/popper.min.js')}}"></script>
@@ -232,5 +235,39 @@
       <script async src="{{asset('assets/js/chart-custom.js')}}"></script>
       <!-- Custom JavaScript -->
       <script src="{{asset('assets/js/custom.js')}}"></script>
+
+      <script>
+        $(document).ready(function(){
+            document.getElementById("reader").hidden = true;
+            document.getElementById("btn-stop").hidden = true;
+            const html5QrCode = new Html5Qrcode("reader");
+            $('#btn-scan').click(function(){
+                document.getElementById("reader").hidden = false;
+                document.getElementById("btn-stop").hidden = false;
+                const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                    document.getElementById("item_id").value = decodedText;
+                    html5QrCode.stop().then((ignore) => {
+                    // QR Code scanning is stopped.
+                    }).catch((err) => {
+                    // Stop failed, handle it.
+                    });
+                    document.getElementById("reader").hidden = true;
+                    document.getElementById("btn-stop").hidden = true;
+                };
+                const config = { fps: 10, qrbox: { width: 200, height: 200 } };
+                // If you want to prefer back camera
+                html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+            });
+            $('#btn-stop').click(function(){
+                document.getElementById("btn-stop").hidden = true;
+                html5QrCode.stop().then((ignore) => {
+                    // QR Code scanning is stopped.
+                    }).catch((err) => {
+                    // Stop failed, handle it.
+                    });
+                    document.getElementById("reader").hidden = true;
+            });
+        });
+      </script>
    </body>
 </html>
