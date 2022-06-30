@@ -131,12 +131,14 @@
                               <label for="scan">Gunakan QR Scanner</label>
                               <button type="submit" class="btn btn-secondary">Scan</button>
                         </form>
+                        <button id="btn-scan" type="submit" class="btn btn-secondary">Scan2</button>
                      </div>
+                     <div id="reader" width="600px">ello</div>
                   <form method="POST" action="{{route ('inventoryout.store')}}" onsubmit="return confirm('Pastikan data yang diisikan sudah benar! Klik OK untuk melanjutkan.');">
                   @csrf
                      <div class="form-group">
                         <label for="id">ID Item</label>
-                        <input type="text" class="form-control" name="item_id" list="itemlist">
+                        <input id="item_id" type="text" class="form-control" name="item_id" list="itemlist">
                         <datalist id="itemlist">
                            @foreach($items as $item)
                            <option value="{{$item->item_id}}">{{$item->item_id}} - {{$item->item_name}}</option>
@@ -173,6 +175,7 @@
       <!-- Footer END -->
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
       <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 
@@ -219,5 +222,28 @@
       <script async src="{{asset('assets/js/chart-custom.js')}}"></script>
       <!-- Custom JavaScript -->
       <script src="{{asset('assets/js/custom.js')}}"></script>
+
+      <script>
+        $(document).ready(function(){
+            document.getElementById("reader").hidden = true;
+            $('#btn-scan').click(function(){
+                document.getElementById("reader").hidden = false;
+                const html5QrCode = new Html5Qrcode("reader");
+                const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                    document.getElementById("item_id").value = decodedText;
+                    html5QrCode.stop().then((ignore) => {
+                    // QR Code scanning is stopped.
+                    }).catch((err) => {
+                    // Stop failed, handle it.
+                    });
+                    document.getElementById("reader").hidden = true;
+                };
+                const config = { fps: 10, qrbox: { width: 200, height: 200 } };
+
+                // If you want to prefer back camera
+                html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+            });
+        });
+      </script>
    </body>
 </html>
