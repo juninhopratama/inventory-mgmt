@@ -56,40 +56,40 @@
             </div>
             <div id="sidebar-scrollbar">
                <nav class="iq-sidebar-menu">
-                  <ul id="iq-sidebar-toggle" class="iq-menu">
-                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Home</span></li>
-                     <li>
-                        <a href="{{url ('/')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                     </li>
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Home</span></li>
+                    <li>
+                       <a href="{{url ('/')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                    </li>
 
-                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Management</span></li>
-                     <li>
-                        <a href="{{route ('registitem.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-file-edit-line"></i><span>Register Item</span></a>
-                     </li>
-                     <li>
-                        <a href="{{route ('inventoryin.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-install-fill"></i><span>Inventory In</span></a>
-                     </li>
-                     <li>
-                        <a href="{{route ('inventoryout.create')}}" class="iq-waves-effect"><i class="ri-uninstall-fill"></i><span>Inventory Out</span></a>
-                     </li>
-                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Dashboard</span></li>
-                     <li>
-                        <a href="{{route ('allitem.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-chat-check-line"></i><span>All Items</span></a>
-                     </li>
-                     <li class="active">
-                        <a href="{{route ('orderlist.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-truck-line"></i><span>All Orders</span></a>
-                     </li>
-                     <li>
-                        <a href="{{route ('stockreportinghome')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-store-line"></i><span>Stock Reporting</span></a>
-                     </li>
-                     <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>-</span></li>
-                     <li>
-                        <a href="{{route ('logout')}}" class="iq-waves-effect" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-logout-box-r-line"></i><span>Log Out</span></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                     </li>
-                  </ul>
+                    <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Management</span></li>
+                    <li>
+                       <a href="{{route ('registitem.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-file-edit-line"></i><span>Register Item</span></a>
+                    </li>
+                    <li>
+                       <a href="{{route ('inventoryin.create')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-install-fill"></i><span>Inventory In</span></a>
+                    </li>
+                    <li>
+                       <a href="{{route ('inventoryout.create')}}" class="iq-waves-effect"><i class="ri-uninstall-fill"></i><span>Inventory Out</span></a>
+                    </li>
+                    <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Inventory Dashboard</span></li>
+                    <li>
+                       <a href="{{route ('allitem.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-chat-check-line"></i><span>All Items</span></a>
+                    </li>
+                    <li>
+                       <a href="{{route ('orderlist.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-truck-line"></i><span>All Orders</span></a>
+                    </li>
+                    <li class="active">
+                       <a href="{{route ('stockreportinghome')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-store-line"></i><span>Stock Reporting</span></a>
+                    </li>
+                    <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>-</span></li>
+                    <li>
+                       <a href="{{route ('logout')}}" class="iq-waves-effect" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-logout-box-r-line"></i><span>Log Out</span></a>
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           @csrf
+                       </form>
+                    </li>
+                 </ul>
                </nav>
                <div class="p-3"></div>
             </div>
@@ -100,6 +100,12 @@
             @if (session('success'))
             <div class="alert-success">
                <p>{{ session('success') }}</p>
+            </div>
+            @endif
+
+            @if (session('info'))
+            <div class="alert-info">
+               <p>{{ session('info') }}</p>
             </div>
             @endif
 
@@ -114,53 +120,39 @@
             @endif
             <div class="container-fluid">
          <div class="row">
-         <div class="col-sm-6 col-md-6 col-lg-3">
-                     <div class="iq-card iq-card-block iq-card-stretch ">
-                        <div class="iq-card-body">
-                                <div class="d-flex d-flex align-items-center justify-content-between">
-                                   <div>
-                                       <h2>{{$totalQty}}</h2>
-                                       <p class="fontsize-sm m-0">Total Quantity</p>
-                                   </div>
-                                   <div class="rounded-circle iq-card-icon dark-icon-light iq-bg-danger "> <i class="ri-uninstall-fill"></i></div>
-                                </div>
-                        </div>
-                     </div>
-                  </div>
             <div class="col-sm-12">
                   <div class="iq-card">
+                  <div class="iq-card-body">
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
-                              <h4 class="card-title">{{$orderId}} for product {{$itemId}} - {{$inventoryName}}</h4>
+                              <h4 class="card-title">Stock Reporting</h4>
                            </div>
-                           <p>Showing 50 items per page</p>
+                           <p>Tanggal: {{$date}}</p>
                         </div>
                         <div class="iq-card-body">
                            <div class="table-responsive">
                               <table id="datatable" class="table table-striped table-bordered" >
                        <thead>
                            <tr>
-                               <th>No</th>
-                               <th>Kode Lot</th>
-                               <th>Kode Rak</th>
-                               <th>Jumlah Keluar</th>
-                               <th>Keterangan</th>
+                               <th>ID Item</th>
+                               <th>Nama Item</th>
+                               <th>Satuan Item</th>
+                               <th>Quantity</th>
                            </tr>
                        </thead>
                        <tbody>
-                          @foreach ($orders as $order)
+                          @foreach ($items as $item)
                            <tr>
-                               <td>{{$order->queue_no}}</td>
-                               <td>{{$order->lot_id}}</td>
-                               <td>{{$order->kode_rak}}</td>
-                               <td>{{$order->qty}}</td>
-                               <td>{{$order->out_detail}}</td>
+                               <td>{{$item->item_id}}</td>
+                               <td><a href="{{url ('/stock-reporting/search/detail')}}?id={{$item->item_id}}&date={{$date}}">{{$item->item_name}}</a></td>
+                               <td>{{$item->item_satuan}}</td>
+                               <td>{{$item->Qty}}</td>
                            </tr>
                            @endforeach
                        </tbody>
                    </table>
                   </div>
-                  {!! $orders->render() !!}
+                  {!! $items->links('pagination::bootstrap-4') !!}
                </div>
              </div>
             </div>

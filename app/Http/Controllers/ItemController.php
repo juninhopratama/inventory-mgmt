@@ -18,7 +18,7 @@ class ItemController extends Controller
         $items = DB::table('items')
             ->orderBy('item_id','asc')
             ->paginate(50);
-        
+
         return view('fifo.allitem', [
             'items' => $items
         ]);

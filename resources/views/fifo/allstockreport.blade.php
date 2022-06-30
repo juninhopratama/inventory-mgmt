@@ -76,10 +76,10 @@
                      <li>
                         <a href="{{route ('allitem.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-chat-check-line"></i><span>All Items</span></a>
                      </li>
-                     <li class="active">
+                     <li>
                         <a href="{{route ('orderlist.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-truck-line"></i><span>All Orders</span></a>
                      </li>
-                     <li>
+                     <li class="active">
                         <a href="{{route ('stockreportinghome')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-store-line"></i><span>Stock Reporting</span></a>
                      </li>
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>-</span></li>
@@ -103,6 +103,12 @@
             </div>
             @endif
 
+            @if (session('info'))
+            <div class="alert-info">
+               <p>{{ session('info') }}</p>
+            </div>
+            @endif
+
             @if ($errors->any())
             <div class="alert-danger">
                <ul>
@@ -114,53 +120,57 @@
             @endif
             <div class="container-fluid">
          <div class="row">
-         <div class="col-sm-6 col-md-6 col-lg-3">
-                     <div class="iq-card iq-card-block iq-card-stretch ">
-                        <div class="iq-card-body">
-                                <div class="d-flex d-flex align-items-center justify-content-between">
-                                   <div>
-                                       <h2>{{$totalQty}}</h2>
-                                       <p class="fontsize-sm m-0">Total Quantity</p>
-                                   </div>
-                                   <div class="rounded-circle iq-card-icon dark-icon-light iq-bg-danger "> <i class="ri-uninstall-fill"></i></div>
-                                </div>
-                        </div>
-                     </div>
-                  </div>
             <div class="col-sm-12">
-                  <div class="iq-card">
-                        <div class="iq-card-header d-flex justify-content-between">
-                           <div class="iq-header-title">
-                              <h4 class="card-title">{{$orderId}} for product {{$itemId}} - {{$inventoryName}}</h4>
-                           </div>
-                           <p>Showing 50 items per page</p>
-                        </div>
+                <div class="iq-card">
+                      <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Stock Reporting</h4>
+                          </div>
+                       </div>
+                  <div class="iq-card-body">
+                  <div class="form-group">
+                  <form method="GET" action="{{ route ('stockreporting') }}">
+                     <div class="form-group">
+                        <label for="date">Cari Tanggal</label>
+                        <input type="date" class="form-control" name="date">
+                     </div>
+                     <button type="submit" class="btn btn-primary">Cari</button>
+                  </form>
+               </div>
+
                         <div class="iq-card-body">
-                           <div class="table-responsive">
+                           {{-- <div class="table-responsive">
                               <table id="datatable" class="table table-striped table-bordered" >
                        <thead>
                            <tr>
-                               <th>No</th>
-                               <th>Kode Lot</th>
-                               <th>Kode Rak</th>
-                               <th>Jumlah Keluar</th>
-                               <th>Keterangan</th>
+                               <th>ID Item</th>
+                               <th>Nama Item</th>
+                               <th>Satuan Item</th>
+                               <th>Supplier Item</th>
+                               <th>Action</th>
                            </tr>
                        </thead>
                        <tbody>
-                          @foreach ($orders as $order)
+                          @foreach ($items as $item)
                            <tr>
-                               <td>{{$order->queue_no}}</td>
-                               <td>{{$order->lot_id}}</td>
-                               <td>{{$order->kode_rak}}</td>
-                               <td>{{$order->qty}}</td>
-                               <td>{{$order->out_detail}}</td>
+                               <td>{{$item->item_id}}</td>
+                               <td><a href="{{route ('inventoryin.list', $item->item_id)}}">{{$item->item_name}}</a></td>
+                               <td>{{$item->item_satuan}}</td>
+                               <td>{{$item->item_supplier}}</td>
+                               <td>
+                                  <a href="{{route ('registitem.edit', $item->item_id)}}" type="button" class="btn mb-1 btn-info rounded-pill "><i class="ri-draft-line"></i>Edit Item</a>
+                                  <form action="{{ route('registitem.delete',$item->item_id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus item ini?');">
+                                     @csrf
+                                     @method('DELETE')
+                                    <button type="submit" class="btn btn-danger rounded-pill"><i class="ri-delete-bin-line"></i>Hapus Item</button>
+                                  </form>
+                              </td>
                            </tr>
                            @endforeach
                        </tbody>
                    </table>
-                  </div>
-                  {!! $orders->render() !!}
+                  </div> --}}
+                  {{-- {!! $items->links('pagination::bootstrap-4') !!} --}}
                </div>
              </div>
             </div>

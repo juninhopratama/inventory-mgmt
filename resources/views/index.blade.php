@@ -79,6 +79,9 @@
                      <li>
                         <a href="{{route ('orderlist.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-truck-line"></i><span>All Orders</span></a>
                      </li>
+                     <li>
+                        <a href="{{route ('stockreportinghome')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-store-line"></i><span>Stock Reporting</span></a>
+                     </li>
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>-</span></li>
                      <li>
                         <a href="{{route ('logout')}}" class="iq-waves-effect" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-logout-box-r-line"></i><span>Log Out</span></a>
@@ -171,6 +174,22 @@
                      </div>
                      </a>
                   </div>
+
+                  <div class="col-sm-6 col-md-6 col-lg-3">
+                    <a href="{{route ('stockreportinghome')}}">
+                    <div class="iq-card iq-card-block iq-card-stretch ">
+                       <div class="iq-card-body">
+                          <div class="d-flex d-flex align-items-center justify-content-between">
+                             <div>
+                                 <h2>All Stock Reporting</h2>
+                                 <p class="fontsize-sm m-0">Laporan Stok</p>
+                             </div>
+                             <div class="rounded-circle iq-card-icon iq-bg-info "><i class="ri-store-line"></i></div>
+                          </div>
+                      </div>
+                    </div>
+                    </a>
+                 </div>
                </div>
                </div>
          </div>

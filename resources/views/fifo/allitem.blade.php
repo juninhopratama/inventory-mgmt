@@ -79,6 +79,9 @@
                      <li>
                         <a href="{{route ('orderlist.show')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-truck-line"></i><span>All Orders</span></a>
                      </li>
+                     <li>
+                        <a href="{{route ('stockreportinghome')}}" class="iq-waves-effect" aria-expanded="false"><i class="ri-store-line"></i><span>Stock Reporting</span></a>
+                     </li>
                      <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>-</span></li>
                      <li>
                         <a href="{{route ('logout')}}" class="iq-waves-effect" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-logout-box-r-line"></i><span>Log Out</span></a>
@@ -123,8 +126,10 @@
                   <div class="form-group">
                   <form method="GET" action="{{ route ('searchitem') }}">
                      <div class="form-group">
-                        <label for="id">Cari Item</label>
+                        <label for="search_string">Cari Item</label>
                         <input type="text" class="form-control" name="search_string">
+                        <label for="date">Cari Tanggal</label>
+                        <input type="date" class="form-control" name="date">
                      </div>
                      <button type="submit" class="btn btn-primary">Cari</button>
                   </form>
